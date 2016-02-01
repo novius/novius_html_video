@@ -8,12 +8,7 @@ $media = \Nos\Media\Model_Media::find($args['media']);
 
 $align = \Arr::get($args, 'align', 'left');
 
-
-$setup = array(
-    'width' => \Arr::get($args, 'width')
-);
-
-$setup = array_filter($setup);
+$setup = array_filter(\Arr::get($config, 'setup', array()));
 $id = uniqid('novius_video_');
 
 ?>
