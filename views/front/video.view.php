@@ -3,7 +3,6 @@
 if (empty($args['media'])) {
     return;
 }
-
 $media = \Nos\Media\Model_Media::find($args['media']);
 
 $align = \Arr::get($args, 'align', 'left');
@@ -12,6 +11,9 @@ $setup = array_filter(\Arr::get($config, 'setup', array()));
 $id = uniqid('novius_video_');
 
 ?>
+<noscript>
+    <a href="<?=$media->url(false)?>">Video</a>
+</noscript>
 <div class="video-container"
      style="text-align:<?= $align ?>">
     <video
