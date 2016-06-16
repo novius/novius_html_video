@@ -9,10 +9,20 @@ $align = \Arr::get($args, 'align', 'left');
 
 $setup = array_filter(\Arr::get($config, 'setup', array()));
 $id = uniqid('novius_video_');
-
+$poster = null;
+if (!empty($args['poster'])) {
+    $poster = \Nos\Media\Model_Media::find($args['poster']);
+}
 ?>
 <noscript>
-    <a href="<?=$media->url(false)?>">Video</a>
+    <a href="<?= $media->url(false) ?>">Video</a>
+    <?php
+    if (!empty($poster)) {
+        ?>
+        <a href="<?= $poster->url(false) ?>">Poster</a>
+        <?php
+    }
+    ?>
 </noscript>
 <div class="video-container"
      style="text-align:<?= $align ?>">
@@ -43,11 +53,8 @@ $id = uniqid('novius_video_');
             echo " muted='muted' ";
         }
 
-        if (!empty($args['poster'])) {
-            $poster = \Nos\Media\Model_Media::find($args['poster']);
-            if (!empty($media)) {
-                echo " poster='".$poster->url(false)."' ";
-            }
+        if (!empty($poster)) {
+            echo " poster='".$poster->url(false)."' ";
         }
 
         ?>
